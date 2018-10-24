@@ -18,5 +18,6 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$', include('apps.ajaxify.urls')),
+    url(r'^', include('apps.ajaxify.urls')),
+    url(r'^ajaxify/', include('apps.ajaxify.urls')),
 ]

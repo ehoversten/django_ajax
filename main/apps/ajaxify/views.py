@@ -1,13 +1,23 @@
 from django.shortcuts import render, HttpResponse, redirect
+from .models import Post
+from .forms import PostForm
 
 # Create your views here.
 def index(request):
-    # response = "Hi There ..."
-
+    # create an instance of the form
+    form = PostForm()
     context = {
-        "name"  : "Mike",
-        "email" : "mikey@thefatkid.com",
+        "form": form,
     }
-
-    # return HttpResponse(response)
     return render(request, "ajaxify/index.html", context)
+
+
+def insert(request):
+    # print("REQUEST: " + request.POST)
+    if request.method == "POST":
+        print(request.POST)
+        print("*"*50)
+        post = Post(title=request.POST['title'], message=request.POST['message'])
+        post.save()
+    # print("POST: " + post)
+    return redirect('/')
