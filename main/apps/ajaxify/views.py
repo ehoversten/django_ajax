@@ -2,6 +2,9 @@ from django.shortcuts import render, HttpResponse, redirect
 from .models import Post
 from .forms import PostForm
 
+
+import json
+import requests
 # Create your views here.
 def index(request):
     # create an instance of the form
@@ -18,15 +21,28 @@ def index(request):
 def insert(request):
     # print("REQUEST: " + request.POST)
     if request.method == "POST":
-        # print(request.POST)
-        # print("*"*50)
-        # print("TITLE: " + request.POST['title'])
-        # print("MESSAGE: " + request.POST['message'])
-        # print("*"*50)
+        # create new post and redirest to index route
+        bound_post_form = PostForm(request.POST)
+        print('POST: ', bound_post_form)
+        if bound_post_form.is_valid():
+            # create a new post and save it to the database
+            post = Post.objects.create(title=request.POST['title'], message=request.POST['message'])
+            print('New post created: ', post)
 
-        post = Post(title=request.POST['title'], message=request.POST['message'])
-        post.save()
+        # ---- OR ----- (Less safe way?) -- /
+        # post = Post(title=request.POST['title'], message=request.POST['message'])
+        # print('New post created: ', post)
+        # post.save()
 
-        # print(post)
-    # print("POST: " + post)
+    # """
+    #   We do this on both GET and POST requests
+    #   Fetch all posts and render only the partial posts_index.html
+    # """
+
+    # context = {
+    #     'posts' : Post.objects.all(),
+    # }
+    #
+    # return render(request, 'ajaxify/index.html', context)
+
     return redirect('/')
