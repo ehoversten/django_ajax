@@ -17,7 +17,11 @@ urlpatterns = [
     url(r'^new_post$', views.NewPostView.as_view(), name='new_post'),
 
     # practice routes
-    url(r'^home', views.HomePageView.as_view(), name='home'),
-    url(r'^about/$', views.AboutPageView.as_view(), name='about'),
+    url(r'^home$', views.HomePageView.as_view(), name='home'),
+    url(r'^about$', views.AboutPageView.as_view(), name='about'),
+
+    url(r'^contacts$', views.contacts, name='contacts'),
+    url(r'^contact_page$', views.ContactPageView.as_view(), name='contact_page'),
+
 
 ]

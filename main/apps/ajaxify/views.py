@@ -1,6 +1,6 @@
 from django.shortcuts import render, HttpResponse, redirect
 from .models import Post
-from .forms import PostForm
+from .forms import PostForm, ContactForm
 
 from django.views.generic import View, ListView, CreateView, TemplateView, FormView
 
@@ -114,3 +114,18 @@ class HomePageView(TemplateView):
 
 class AboutPageView(TemplateView):
     template_name = "ajaxify/about.html"
+
+# // ---- FORMS ---- //
+
+class ContactPageView(FormView):
+    template_name = 'ajaxify/contact.html'
+    form_class = ContactForm
+
+def contacts(request):
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            pass  # does nothing, just trigger the validation
+    else:
+        form = ContactForm()
+    return render(request, 'ajaxify/contact.html', {'form': form})
