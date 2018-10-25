@@ -50,6 +50,8 @@ def insert(request):
     return redirect('/')
 
 
+# // ---- CLASS BASED VIEWS ---- //
+
 class Posts(View):
     def get(self, request, *args, **kwargs):
         return HttpResponse("Hi, There!")
@@ -104,3 +106,11 @@ class PostListView(ListView):
     def get_context_data(self, *args, **kwargs):
         context = super(PostListView, self).get_context_data(**kwargs)
         return context
+
+
+class HomePageView(TemplateView):
+    template_name = "ajaxify/home.html"
+
+
+class AboutPageView(TemplateView):
+    template_name = "ajaxify/about.html"
