@@ -44,26 +44,21 @@
               </tr>
             </thead>
             <tbody>
-            {% for post in posts %}
-              <tr>
-                <th scope="row">{{ post.id }}</th>
-                <td>{{ post.title }}</td>
-                <td>{{ post.message }}</td>
-              </tr>
-            {% endfor %}
+              <div class="posts">
+                {% for post in posts %}
+                <tr>
+                  <th scope="row">{{ post.id }}</th>
+                  <td>{{ post.title }}</td>
+                  <td>{{ post.message }}</td>
+                </tr>
+                {% endfor %}
+              </div>
             </tbody>
           </table>
         </div>
       </div>
     </div>
 
-    <div class="container">
-      <div class="row">
-        <div id="placeholder" class="content">
-
-        </div>
-      </div>
-    </div>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -92,7 +87,7 @@
             data: $(this).serialize(),
             success: function(data) {
               console.log('Success: ', data)
-              $('#placeholder').html(data)
+              $('.posts').html(data)
             }
           });
         });
